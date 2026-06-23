@@ -119,8 +119,7 @@ elif st.session_state.step == 3:
         ["🍣 Суши / Роллы", "🍕 Горячая пицца", "🍔 Сочные бургеры", "🍝 Паста", "🍜 Пряный Рамен", "☕ Кофе и десерты"]
     )
     
-    if st.
-button("Утвердить план свидания ✨"):
+    if st.button("Утвердить план свидания ✨"):
         st.session_state.date = date
         st.session_state.time = time_choice
         st.session_state.food = food
