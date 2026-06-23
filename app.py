@@ -86,7 +86,7 @@ if 'step' not in st.session_state:
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
     # Первая фотография (Шут с розой)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image1.png", use_container_width=True)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image1.png.jpg", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -105,7 +105,7 @@ if st.session_state.step == 1:
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
     # Вторая фотография (Шут со взглядом-сердечками)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image2.png", use_container_width=True)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image2.png.jpg", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
     
@@ -137,7 +137,7 @@ elif st.session_state.step == 3:
 elif st.session_state.step == 4:
     st.balloons()
     # Третья фотография (Засмущавшийся шут)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image3.png", use_container_width=True)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image3.png.jpg", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
