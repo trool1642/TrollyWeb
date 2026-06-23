@@ -16,16 +16,16 @@ st.markdown("""
         background-attachment: fixed;
     }
     
-    /* Затемняющая нежная вуаль поверх гифки, чтобы текст легко читался */
+    /* Затемняющая нежная вуаль поверх гифки для читаемости */
     .stApp::before {
         content: '';
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(255, 240, 245, 0.6); /* Нежно-розовый полупрозрачный фильтр */
+        background: rgba(255, 240, 245, 0.55);
         z-index: 0;
     }
 
-    /* Эффект падающих сердечек поверх фоновых котиков */
+    /* Падающие сердечки */
     .stApp::after {
         content: '💖'; position: absolute; top: -50px; left: 15%;
         font-size: 30px; animation: airborneHearts 6s linear infinite; opacity: 0.7;
@@ -39,7 +39,7 @@ st.markdown("""
         100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Пульсирующие кнопки */
+    /* Пульсирующие стильные кнопки */
     .stButton>button {
         background: linear-gradient(135deg, #FF69B4, #FF1493) !important;
         color: white !important; border-radius: 30px !important; 
@@ -57,30 +57,17 @@ st.markdown("""
         100% { transform: scale(1); }
     }
 
-    /* Плавное покачивание эмодзи */
-    .big-emoji {
-        font-size: 80px;
-        text-align: center;
-        margin: 15px 0;
-        animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-        0% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-10px) rotate(3deg); }
-        100% { transform: translateY(0px) rotate(0deg); }
-    }
-
-    /* Матовая аккуратная белая карточка по центру */
+    /* Матовая белая карточка по центру */
     .block-container {
         position: relative;
-        z-index: 2; /* Выносим контент поверх гифки фона */
-        background: rgba(255, 255, 255, 0.88); padding: 2.5rem !important;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.9); padding: 2.5rem !important;
         border-radius: 35px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(8px); border: 2px solid rgba(255, 192, 203, 0.5);
         margin-top: 40px;
     }
 
-    h1, h2, h3, p {
+    h1, h2, h3, p, .stImage {
         color: #C71585 !important; text-align: center;
         animation: popUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -98,7 +85,8 @@ if 'step' not in st.session_state:
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    st.markdown('<div class="big-emoji">🐱🌹</div>', unsafe_allow_html=True)
+    # Первая фотография (Шут с розой)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image1.png", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -116,15 +104,16 @@ if st.session_state.step == 1:
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    st.markdown('<div class="big-emoji">😻✨</div>', unsafe_allow_html=True)
+    # Вторая фотография (Шут со взглядом-сердечками)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image2.png", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
-    st.write("Ура! Я самый счастливый айтишник! Давай настроим нашу встречу 👇")
+    st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
     
     if st.button("Выбрать время и еду! ✨"):
         st.session_state.step = 3
         st.rerun()
 
-# --- ШАГ 3 (Мишка убран, тут только инпуты) ---
+# --- ШАГ 3 ---
 elif st.session_state.step == 3:
     st.write("## Когда ты свободна? 📅")
     
@@ -134,7 +123,7 @@ elif st.session_state.step == 3:
     st.write("### Что ты хочешь покушать? 🍕")
     food = st.selectbox(
         "Выбери то, что тебе в кайф:",
-        ["🍣 Суши / Роллы", "🍕 Горячая пицца", "🍔 Сочные бургеры", "🍝 Итальянская паста", "🍜 Пряный Рамен", "☕️ Кофе и десерты"]
+        ["🍣 Суши / Роллы", "🍕 Горячая pizza", "🍔 Сочные бургеры", "🍝 Итальянская паста", "🍜 Пряный Рамен", "☕️ Кофе и десерты"]
     )
     
     if st.button("Зафиксировать идеальный план! 🚀"):
@@ -147,7 +136,8 @@ elif st.session_state.step == 3:
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    st.markdown('<div class="big-emoji">👩‍❤️‍👨🍝</div>', unsafe_allow_html=True)
+    # Третья фотография (Засмущавшийся шут)
+    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image3.png", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
