@@ -1,13 +1,32 @@
 import streamlit as st
 import time
+import requests
 
 # Настройка страницы
 st.set_page_config(page_title="Приглашение для тебя ✨", page_icon="🐱", layout="centered")
 
+# --- НАСТРОЙКА TELEGRAM ДЛЯ ЛОГОВ ---
+# 1. Создай бота в @BotFather и вставь сюда токен:
+TELEGRAM_TOKEN = "ТВОЙ_ТОКЕН_БОТА_ЗДЕСЬ" 
+# 2. Узнай свой ID в @userinfobot и вставь сюда (без кавычек, просто число):
+TELEGRAM_CHAT_ID = 389820312
+
+def send_telegram_log(message):
+    if TELEGRAM_TOKEN != "8591029805:AAHP7tLz1ZoD5YuonVciA1jkVtk5DCvIIgM":
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+        payload = {
+            "chat_id": TELEGRAM_CHAT_ID,
+            "text": message,
+            "parse_mode": "Markdown"
+        }
+        try:
+            requests.post(url, json=payload)
+        except Exception as e:
+            pass
+
 # --- МЕГА-СТИЛИ С АНИМИРОВАННЫМ ГИФ-ФОНОМ И СЕРДЕЧКАМИ (CSS) ---
 st.markdown("""
     <style>
-    /* Твоя фоновая гифка с котиками */
     .stApp {
         background-image: url("https://gifgive.com/wp-content/uploads/2021/09/kotiki-1.gif");
         background-size: cover;
@@ -15,8 +34,6 @@ st.markdown("""
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-    
-    /* Затемняющая нежная вуаль поверх гифки для идеальной читаемости текста */
     .stApp::before {
         content: '';
         position: absolute;
@@ -24,22 +41,17 @@ st.markdown("""
         background: rgba(255, 240, 245, 0.55);
         z-index: 0;
     }
-
-    /* Эффект падающих сердечек поверх фоновых котиков */
     .stApp::after {
         content: '💖'; position: absolute; top: -50px; left: 15%;
         font-size: 30px; animation: airborneHearts 6s linear infinite; opacity: 0.7;
         z-index: 1;
     }
-
     @keyframes airborneHearts {
         0% { transform: translateY(0) rotate(0deg); opacity: 0; }
         10% { opacity: 0.7; }
         90% { opacity: 0.7; }
         100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
     }
-
-    /* Пульсирующие стильные кнопки */
     .stButton>button {
         background: linear-gradient(135deg, #FF69B4, #FF1493) !important;
         color: white !important; border-radius: 30px !important; 
@@ -56,8 +68,6 @@ st.markdown("""
         50% { transform: scale(1.04); }
         100% { transform: scale(1); }
     }
-
-    /* Матовая белая карточка по центру */
     .block-container {
         position: relative;
         z-index: 2;
@@ -66,7 +76,6 @@ st.markdown("""
         backdrop-filter: blur(8px); border: 2px solid rgba(255, 192, 203, 0.5);
         margin-top: 40px;
     }
-
     h1, h2, h3, p, .stImage {
         color: #C71585 !important; text-align: center;
         animation: popUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -78,24 +87,24 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Инициализация состояний шагов
 if 'step' not in st.session_state:
     st.session_state.step = 1
 
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    # Шаг 1: Ты пойдешь со мной на свидание? -> Шут с розой (image1.png.jpg)
     st.image("image1.png.jpg", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Да! 🥰"):
+            send_telegram_log("🔔 *Лог:* Она нажала 'Да!' на первом шаге. ❤️")
             st.session_state.step = 2
             st.rerun()
     with col2:
         if st.button("Нет... 🐾"):
+            send_telegram_log("😈 *Лог:* Она попыталась нажать 'Нет...', но мы-то знаем правду! 😉")
             st.balloons()
             st.toast("Кнопка 'Нет' временно недоступна. Выбрано ДА! 🤭")
             time.sleep(1.5)
@@ -104,7 +113,6 @@ if st.session_state.step == 1:
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    # Шаг 2: Подожди реально да? -> Шут со взглядом-сердечками (image2.png.jpg)
     st.image("image2.png.jpg", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
@@ -131,12 +139,18 @@ elif st.session_state.step == 3:
         st.session_state.time = time_choice
         st.session_state.food = food
         st.session_state.step = 4
+        
+        # Отправка финального лога в Telegram
+        formatted_date = date.strftime("%d.%m.%Y")
+        formatted_time = time_choice.strftime("%H:%M")
+        log_msg = f"🎉 *ЕЕЕ БОЙ! План свидания зафиксирован!* 🎉\n\n📅 *Дата:* {formatted_date}\n⏰ *Время:* {formatted_time}\n🍕 *Выбор еды:* {food}"
+        send_telegram_log(log_msg)
+        
         st.rerun()
 
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    # Шаг 4: Финальное окно "Рад, что ты не отказалась" -> Засмущавшийся шут (image3.png.webp)
     st.image("image3.png.webp", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
@@ -149,7 +163,7 @@ elif st.session_state.step == 4:
     * Время: {formatted_time}
     * В меню вечера: {st.session_state.food}
     
-    Будь готова к этому времени, я приеду за тобой! Логи сохранены. 😘
+    Будь готова к этому времени, я приеду за тобой! 😘
     """)
     
     if st.button("Пройти опрос заново 🔄"):
