@@ -125,7 +125,7 @@ if st.session_state.step == 1:
 # --- ШАГ 2: Удивление ---
 elif st.session_state.step == 2:
     # Котики обнимаются
-    st.image("https://media.giphy.com/media/v1.
+    st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5MzVjM3RreG96bnJkMmsyamN5cmptcjY2YWY5aDJsN2dyMmsyNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Y8S98PxFHhJ8sYvRsc/giphy.gif", width=250)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый айтишник в мире! Давай подберем идеальные параметры нашей встречи 👇")
     
