@@ -7,9 +7,9 @@ st.set_page_config(page_title="Приглашение для тебя ✨", page
 
 # --- НАСТРОЙКА TELEGRAM ДЛЯ ЛОГОВ ---
 # 1. Создай бота в @BotFather и вставь сюда токен:
-TELEGRAM_TOKEN = "8591029805:AAFQR374z16zUz144qWOZAotkcLzL56uUzg" 
+TELEGRAM_TOKEN = "" 
 # 2. Узнай свой ID в @userinfobot и вставь сюда (без кавычек, просто число):
-TELEGRAM_CHAT_ID = 389820312  
+TELEGRAM_CHAT_ID = 
 
 def send_telegram_log(message):
     if TELEGRAM_TOKEN != "ТВОЙ_ТОКЕН_БОТА_ЗДЕСЬ":
