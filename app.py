@@ -5,14 +5,17 @@ import requests
 # Настройка страницы
 st.set_page_config(page_title="Приглашение для тебя ✨", page_icon="🐱", layout="centered")
 
-# --- НАСТРОЙКА TELEGRAM ДЛЯ ЛОГОВ ---
-# 1. Создай бота в @BotFather и вставь сюда токен:
-TELEGRAM_TOKEN = "" 
-# 2. Узнай свой ID в @userinfobot и вставь сюда (без кавычек, просто число):
-TELEGRAM_CHAT_ID = 
+# --- БЕЗОПАСНОЕ ПОЛУЧЕНИЕ НАСТРОЕК TELEGRAM ИЗ SECRETS ---
+# Если секреты настроены в Streamlit Cloud, берем их. Если нет — ставим заглушки.
+try:
+    TELEGRAM_TOKEN = st.secrets["TELEGRAM_TOKEN"]
+    TELEGRAM_CHAT_ID = st.secrets["TELEGRAM_CHAT_ID"]
+except Exception:
+    TELEGRAM_TOKEN = "НЕ_НАСТРОЕНО"
+    TELEGRAM_CHAT_ID = 0
 
 def send_telegram_log(message):
-    if TELEGRAM_TOKEN != "ТВОЙ_ТОКЕН_БОТА_ЗДЕСЬ":
+    if TELEGRAM_TOKEN != "НЕ_НАСТРОЕНО":
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
         payload = {
             "chat_id": TELEGRAM_CHAT_ID,
@@ -21,7 +24,7 @@ def send_telegram_log(message):
         }
         try:
             requests.post(url, json=payload)
-        except Exception as e:
+        except Exception:
             pass
 
 # --- МЕГА-СТИЛИ С АНИМИРОВАННЫМ ГИФ-ФОНОМ И СЕРДЕЧКАМИ (CSS) ---
@@ -104,7 +107,7 @@ if st.session_state.step == 1:
             st.rerun()
     with col2:
         if st.button("Нет... 🐾"):
-            send_telegram_log("😈 *Лог:* Она попыталась нажать 'Нет...', но мы-то знаем правду! 😉")
+            send_telegram_log("😈 *Лог:* Она попыталась нажать 'Нет...', но кнопка перенаправила её на ДА! 😉")
             st.balloons()
             st.toast("Кнопка 'Нет' временно недоступна. Выбрано ДА! 🤭")
             time.sleep(1.5)
@@ -143,7 +146,7 @@ elif st.session_state.step == 3:
         # Отправка финального лога в Telegram
         formatted_date = date.strftime("%d.%m.%Y")
         formatted_time = time_choice.strftime("%H:%M")
-        log_msg = f"🎉 *ЕЕЕ БОЙ! План свидания зафиксирован!* 🎉\n\n📅 *Дата:* {formatted_date}\n⏰ *Время:* {formatted_time}\n🍕 *Выбор еды:* {food}"
+        log_msg = f"🎉 *План свидания зафиксирован!* 🎉\n\n📅 *Дата:* {formatted_date}\n⏰ *Время:* {formatted_time}\n🍕 *Выбор еды:* {food}"
         send_telegram_log(log_msg)
         
         st.rerun()
