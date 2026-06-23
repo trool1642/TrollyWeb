@@ -4,37 +4,38 @@ import time
 # Настройка страницы
 st.set_page_config(page_title="Приглашение для тебя ✨", page_icon="🐱", layout="centered")
 
-# --- МЕГА-СТИЛИ С АНИМАЦИЕЙ ЛЕТАЮЩИХ СЕРДЕЧЕК (CSS) ---
+# --- МЕГА-СТИЛИ С АНИМИРОВАННЫМ ГИФ-ФОНОМ И СЕРДЕЧКАМИ (CSS) ---
 st.markdown("""
     <style>
-    /* Анимированный нежный фон */
+    /* Твоя гифка с котиками на фоне всего приложения */
     .stApp {
-        background: linear-gradient(-45deg, #FFF0F5, #FFE4E1, #FFC0CB, #FFF0F5);
-        background-size: 400% 400%;
-        animation: gradient 12s ease infinite;
-        overflow: hidden;
+        background-image: url("https://gifgive.com/wp-content/uploads/2021/09/kotiki-1.gif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    
+    /* Затемняющая нежная вуаль поверх гифки, чтобы текст легко читался */
+    .stApp::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255, 240, 245, 0.6); /* Нежно-розовый полупрозрачный фильтр */
+        z-index: 0;
     }
 
-    /* Эффект падающих сердечек на фоне */
-    .stApp::before {
-        content: '💖'; position: absolute; top: -50px; left: 10%;
-        font-size: 30px; animation: airborneHearts 6s linear infinite; opacity: 0.6;
-    }
+    /* Эффект падающих сердечек поверх фоновых котиков */
     .stApp::after {
-        content: '💝'; position: absolute; top: -50px; left: 85%;
-        font-size: 35px; animation: airborneHearts 8s linear infinite;
-        animation-delay: 3s; opacity: 0.5;
+        content: '💖'; position: absolute; top: -50px; left: 15%;
+        font-size: 30px; animation: airborneHearts 6s linear infinite; opacity: 0.7;
+        z-index: 1;
     }
 
     @keyframes airborneHearts {
         0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.6; }
-        90% { opacity: 0.6; }
+        10% { opacity: 0.7; }
+        90% { opacity: 0.7; }
         100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
     }
 
@@ -56,25 +57,27 @@ st.markdown("""
         100% { transform: scale(1); }
     }
 
-    /* Анимированные крупные эмодзи вместо картинок */
-    .big-cat {
-        font-size: 100px;
+    /* Плавное покачивание эмодзи */
+    .big-emoji {
+        font-size: 80px;
         text-align: center;
-        margin: 20px 0;
+        margin: 15px 0;
         animation: float 3s ease-in-out infinite;
     }
     @keyframes float {
         0% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-15px) rotate(3deg); }
+        50% { transform: translateY(-10px) rotate(3deg); }
         100% { transform: translateY(0px) rotate(0deg); }
     }
 
-    /* Полупрозрачная матовая карточка */
+    /* Матовая аккуратная белая карточка по центру */
     .block-container {
-        background: rgba(255, 255, 255, 0.85); padding: 2.5rem !important;
-        border-radius: 35px; box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15);
-        backdrop-filter: blur(12px); border: 2px solid rgba(255, 192, 203, 0.5);
-        margin-top: 30px;
+        position: relative;
+        z-index: 2; /* Выносим контент поверх гифки фона */
+        background: rgba(255, 255, 255, 0.88); padding: 2.5rem !important;
+        border-radius: 35px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8px); border: 2px solid rgba(255, 192, 203, 0.5);
+        margin-top: 40px;
     }
 
     h1, h2, h3, p {
@@ -95,7 +98,7 @@ if 'step' not in st.session_state:
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    st.markdown('<div class="big-cat">🐱🌹</div>', unsafe_allow_html=True)
+    st.markdown('<div class="big-emoji">🐱🌹</div>', unsafe_allow_html=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -106,27 +109,26 @@ if st.session_state.step == 1:
     with col2:
         if st.button("Нет... 🐾"):
             st.balloons()
-            st.toast("Кнопка 'Нет' временно сломалась от любви! Автовыбор: ДА! 🤭")
+            st.toast("Кнопка 'Нет' временно недоступна. Выбрано ДА! 🤭")
             time.sleep(1.5)
             st.session_state.step = 2
             st.rerun()
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    st.markdown('<div class="big-cat">🐱❤️🐈</div>', unsafe_allow_html=True)
+    st.markdown('<div class="big-emoji">😻✨</div>', unsafe_allow_html=True)
     st.write("## Подожди... Реально «ДА»?!")
-    st.write("Ура! Я самый счастливый человек! Давай настроим нашу встречу 👇")
+    st.write("Ура! Я самый счастливый айтишник! Давай настроим нашу встречу 👇")
     
     if st.button("Выбрать время и еду! ✨"):
         st.session_state.step = 3
         st.rerun()
 
-# --- ШАГ 3 ---
+# --- ШАГ 3 (Мишка убран, тут только инпуты) ---
 elif st.session_state.step == 3:
-    st.markdown('<div class="big-cat">🧸🎈</div>', unsafe_allow_html=True)
-    st.write("## Когда ты свободна?")
+    st.write("## Когда ты свободна? 📅")
     
-    date = st.date_input("Выбери день 📅")
+    date = st.date_input("Выбери день")
     time_choice = st.time_input("Удобное время ⏰")
     
     st.write("### Что ты хочешь покушать? 🍕")
@@ -145,7 +147,7 @@ elif st.session_state.step == 3:
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    st.markdown('<div class="big-cat">🐈🍝🤵</div>', unsafe_allow_html=True)
+    st.markdown('<div class="big-emoji">👩‍❤️‍👨🍝</div>', unsafe_allow_html=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
@@ -157,7 +159,7 @@ elif st.session_state.step == 4:
     * Время: {formatted_time}
     * В меню вечера: {st.session_state.food}
     
-    Будь готова к этому времени, я приеду за тобой! Логи сохранены на сервере. 😘
+    Будь готова к этому времени, я приеду за тобой! Логи сохранены. 😘
     """)
     
     if st.button("Пройти опрос заново 🔄"):
