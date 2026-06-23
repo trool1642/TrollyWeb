@@ -16,7 +16,7 @@ st.markdown("""
         background-attachment: fixed;
     }
     
-    /* Затемняющая нежная вуаль поверх гифки для читаемости */
+    /* Затемняющая нежная вуаль поверх гифки для идеальной читаемости текста */
     .stApp::before {
         content: '';
         position: absolute;
@@ -25,7 +25,7 @@ st.markdown("""
         z-index: 0;
     }
 
-    /* Падающие сердечки */
+    /* Эффект падающих сердечек поверх фоновых котиков */
     .stApp::after {
         content: '💖'; position: absolute; top: -50px; left: 15%;
         font-size: 30px; animation: airborneHearts 6s linear infinite; opacity: 0.7;
@@ -85,8 +85,8 @@ if 'step' not in st.session_state:
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    # Первая фотография (Шут с розой)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image1.png.jpg", use_container_width=True)
+    # Твоя первая картинка (Шут протягивает розу)
+    st.image("https://i.imgur.com/BfM8gCj.png", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -104,8 +104,8 @@ if st.session_state.step == 1:
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    # Вторая фотография (Шут со взглядом-сердечками)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image2.png.jpg", use_container_width=True)
+    # Твоя вторая картинка (Шут со взглядом-сердечками)
+    st.image("https://i.imgur.com/E8wUuXg.png", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
     
@@ -123,7 +123,7 @@ elif st.session_state.step == 3:
     st.write("### Что ты хочешь покушать? 🍕")
     food = st.selectbox(
         "Выбери то, что тебе в кайф:",
-        ["🍣 Суши / Роллы", "🍕 Горячая pizza", "🍔 Сочные бургеры", "🍝 Итальянская паста", "🍜 Пряный Рамен", "☕️ Кофе и десерты"]
+        ["🍣 Суши / Роллы", "🍕 Горячая пицца", "🍔 Сочные бургеры", "🍝 Итальянская паста", "🍜 Пряный Рамен", "☕️ Кофе и десерты"]
     )
     
     if st.button("Зафиксировать идеальный план! 🚀"):
@@ -136,8 +136,8 @@ elif st.session_state.step == 3:
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    # Третья фотография (Засмущавшийся шут)
-    st.image("https://raw.githubusercontent.com/trool1/trollyweb/main/image3.png.jpg", use_container_width=True)
+    # Твоя третья картинка (Засмущавшийся шут)
+    st.image("https://i.imgur.com/gK9qS12.png", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
