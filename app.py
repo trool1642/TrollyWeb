@@ -7,7 +7,7 @@ st.set_page_config(page_title="Приглашение для тебя ✨", page
 # --- МЕГА-СТИЛИ С АНИМИРОВАННЫМ ГИФ-ФОНОМ И СЕРДЕЧКАМИ (CSS) ---
 st.markdown("""
     <style>
-    /* Твоя гифка с котиками на фоне всего приложения */
+    /* Твоя фоновая гифка с котиками */
     .stApp {
         background-image: url("https://gifgive.com/wp-content/uploads/2021/09/kotiki-1.gif");
         background-size: cover;
@@ -85,8 +85,8 @@ if 'step' not in st.session_state:
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    # Твоя первая картинка (Шут протягивает розу)
-    st.image("https://i.imgur.com/BfM8gCj.png", use_container_width=True)
+    # Берем твою первую картинку из корня репозитория
+    st.image("image1.png", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -104,8 +104,8 @@ if st.session_state.step == 1:
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    # Твоя вторая картинка (Шут со взглядом-сердечками)
-    st.image("https://i.imgur.com/E8wUuXg.png", use_container_width=True)
+    # Берем твою вторую картинку из корня репозитория
+    st.image("image2.png", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
     
@@ -136,8 +136,8 @@ elif st.session_state.step == 3:
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    # Твоя третья картинка (Засмущавшийся шут)
-    st.image("https://i.imgur.com/gK9qS12.png", use_container_width=True)
+    # Берем твою третью картинку из корня репозитория
+    st.image("image3.png", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
