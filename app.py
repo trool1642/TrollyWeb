@@ -85,8 +85,8 @@ if 'step' not in st.session_state:
 # --- ШАГ 1 ---
 if st.session_state.step == 1:
     st.write("### 💌 Тебе пришло секретное послание...")
-    # Берем твою первую картинку из корня репозитория
-    st.image("image1.png", use_container_width=True)
+    # Шаг 1: Ты пойдешь со мной на свидание? -> Шут с розой (image1.png.jpg)
+    st.image("image1.png.jpg", use_container_width=True)
     st.write("## Ты пойдешь со мной на свидание?")
     
     col1, col2 = st.columns(2)
@@ -104,8 +104,8 @@ if st.session_state.step == 1:
 
 # --- ШАГ 2 ---
 elif st.session_state.step == 2:
-    # Берем твою вторую картинку из корня репозитория
-    st.image("image2.png", use_container_width=True)
+    # Шаг 2: Подожди реально да? -> Шут со взглядом-сердечками (image2.png.jpg)
+    st.image("image2.png.jpg", use_container_width=True)
     st.write("## Подожди... Реально «ДА»?!")
     st.write("Ура! Я самый счастливый! Давай настроим нашу встречу 👇")
     
@@ -136,8 +136,8 @@ elif st.session_state.step == 3:
 # --- ШАГ 4 ---
 elif st.session_state.step == 4:
     st.balloons()
-    # Берем твою третью картинку из корня репозитория
-    st.image("image3.png", use_container_width=True)
+    # Шаг 4: Финальное окно "Рад, что ты не отказалась" -> Засмущавшийся шут (image3.png.webp)
+    st.image("image3.png.webp", use_container_width=True)
     st.write("## Рад, что ты не отказалась!")
     
     formatted_date = st.session_state.date.strftime("%d.%m.%Y")
